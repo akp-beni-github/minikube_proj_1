@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-send-metrics
+  labels:
+    app: "yes"
+    Environment: "dev"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "yes"
+      Environment: "dev"
+  template:
+    metadata:
+      labels:
+        app: "yes"
+        Environment: "dev"
+    spec:
+      containers:
+      - name: lynx-app
+        image: dckerbeniii/app-send-metric:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
